@@ -10,7 +10,7 @@ import img3 from "../../../assets/3.jpg"
 const Banner = () => {
     return (
         <div>
-            <AwesomeSlider animation="cubeAnimation">
+            <AwesomeSlider className='h-[650px]'  animation="cubeAnimation">
                 <div data-src={img1}/>
                 <div data-src={img2}/>
                 <div data-src={img3}/>

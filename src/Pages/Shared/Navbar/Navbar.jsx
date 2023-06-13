@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Providers/AuthProvider';
+import { FaUserCircle } from 'react-icons/fa';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        logOut();
+    }
+
     return (
-        <div className="navbar bg-base-100 fixed z-10 max-w-screen-xl">
+        <div className="navbar text-white bg-black bg-opacity-20 fixed z-10 max-w-screen-xl">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -23,7 +31,16 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/login" className='btn'>Login</Link>
+                {
+                    !user && <Link to="/signup" className="btn hover:text-white  border-none hidden lg:block lg:pt-4 mr-4">Register</Link>
+                }
+                {
+                    user ? <Link onClick={handleLogout} className="btn border-none hover:text-white  mr-3">Logout</Link> : <Link to="/login" className="btn border-none hover:text-white mr-3">Login</Link>
+                }
+                {user?.photoURL && <img title={user?.displayName} className="w-10 rounded-full" src={user.photoURL} />}
+                {
+                    user?.photoURL === null && <FaUserCircle title={user?.displayName} style={{ fontSize: "40px" }}></FaUserCircle>
+                }
             </div>
         </div>
     );
