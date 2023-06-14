@@ -16,10 +16,9 @@ const PopularClass = () => {
                         <div className='w-[70%] mx-auto'>
                             <div className="hero-content flex-col lg:flex-row-reverse">
                                 <img src={c?.classimage} className="w-96 rounded-lg shadow-2xl" />
-                                <div>
+                                <div className='w-96 lg:w-full'>
                                     <h1 className="text-2xl font-bold">{c?.classname}</h1>
                                     <p className="py-6">{c?.details.slice(0, 100)}...<span className='btn btn-link'>View Details</span></p>
-
                                 </div>
                             </div>
                         </div>
