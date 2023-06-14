@@ -81,6 +81,13 @@ const AddClass = () => {
                     step="any"
                     required
                 /> <br />
+                <input
+                    className='input border w-[50%] h-20 border-gray-800 m-2 bg-white text-black'
+                    {...register("details")}
+                    placeholder="Write something about your Class..."
+                    type='text'
+                    required
+                /> <br />
                 <input className='btn btn-success border w-[50%] border-gray-800 mt-4' type="submit" value="Add Class" />
             </form>
         </div>
