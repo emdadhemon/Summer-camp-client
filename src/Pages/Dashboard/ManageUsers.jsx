@@ -75,11 +75,11 @@ const ManageUsers = () => {
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user.role === 'admin' ? 'Admin' :
+                                <td>{user.role !== 'admin' && user.role !== 'instructor' ? 
                                    <> <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-orange-600 mr-4 text-white">Make Admin</button>
                                       <button onClick={() => handleMakeInstructor(user)} className="btn btn-ghost bg-orange-600 text-white">Make Instructor</button>
-                                   </>
-                                }</td>
+                                   </>  : <div className="uppercase">{user.role}</div> 
+                                } </td>
                             </tr>)
                         }
 

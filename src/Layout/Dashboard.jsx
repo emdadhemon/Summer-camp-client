@@ -20,20 +20,20 @@ const Dashboard = () => {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-base-200 text-base-content">
                         {
-                            isAdmin &&
+                            isAdmin ?
                             <>
                                 <li><NavLink to="dashboard"><FaHome></FaHome> Admin Home</NavLink></li>
                                 <li><NavLink to="/dashboard/manageClasses"><FaHome></FaHome> Manage Classes</NavLink></li>
                                 <li><NavLink to="/dashboard/manageUsers"><FaHome></FaHome> Manage Users</NavLink></li>
-                            </>
-                        }
-                        {
-                            isInstructor &&
+                            </> :
+                        
+                        
+                            isInstructor ?
                             <>
                                 <li><NavLink to="dashboard"><FaHome></FaHome> Instructor Home</NavLink></li>
                                 <li><NavLink to="/dashboard/addclass"><FaHome></FaHome>Add Class</NavLink></li>
                                 <li><NavLink to="/dashboard/myclasses"><FaHome></FaHome>My Classes</NavLink></li>
-                            </>
+                            </> : ''
                         }
                     </ul>
                     <div>

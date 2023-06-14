@@ -44,6 +44,11 @@ const Register = () => {
             return;
         }
 
+        else if (!/(?=.*[!@#$%^&*])/.test(password)){
+            setError ('Please Add an special Charectar')
+            return;
+        }
+
         if(password !== confirmpassword){
             setError ("your password Didn't match");
             return ;

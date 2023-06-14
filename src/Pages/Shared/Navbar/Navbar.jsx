@@ -40,7 +40,7 @@ const Navbar = () => {
                 {
                     user ? <Link onClick={handleLogout} className="btn border-none hover:text-white  mr-3">Logout</Link> : <Link to="/login" className="btn border-none hover:text-white mr-3">Login</Link>
                 }
-                {user?.photoURL && <img title={user?.displayName} className="w-10 rounded-full" src={user.photoURL} />}
+                {user?.photoURL && <img title={user?.displayName} className="w-10 rounded-full object-cover" src={user.photoURL} />}
                 {
                     user?.photoURL === null && <FaUserCircle title={user?.displayName} style={{ fontSize: "40px" }}></FaUserCircle>
                 }
