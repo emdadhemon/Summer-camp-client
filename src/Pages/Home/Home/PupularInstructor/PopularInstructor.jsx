@@ -19,7 +19,7 @@ const PopularInstructor = () => {
                 {
                     instructors.slice(0, 6).map(i => <div key={i._id}>
                         <div className='text-center flex flex-col items-center'>
-                            <img className='w-32 rounded-full' src={i.photo} alt="" />
+                            <img className='w-32 h-32 object-cover rounded-full' src={i.photo} alt="" />
                             <p className='font-semibold mt-2'>{i.name}</p>
                             <p>{i.email}</p>
                         </div>

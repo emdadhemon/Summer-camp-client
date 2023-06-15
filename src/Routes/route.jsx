@@ -11,6 +11,8 @@ import ManageClasses from "../Pages/Dashboard/ManageClasses";
 import AdminHome from "../Pages/Dashboard/AdminHome";
 import AddClass from "../Pages/Dashboard/AddClass";
 import Myclasses from "../Pages/Dashboard/Myclasses";
+import Courses from "../Pages/Courses/Courses";
+import Instructors from "../Pages/instructors/instructors";
 
   const router = createBrowserRouter([
     {
@@ -28,6 +30,14 @@ import Myclasses from "../Pages/Dashboard/Myclasses";
         {
             path : "signup",
             element : <Register></Register>
+        },
+        {
+            path : "classes",
+            element : <Courses></Courses>
+        },
+        {
+            path : "instructors",
+            element : <Instructors></Instructors>
         }
       ]
     },
