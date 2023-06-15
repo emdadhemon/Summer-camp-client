@@ -14,7 +14,7 @@ const DashboardHome = () => {
                     </> :
                     isInstructor ?
                         <>
-                            <h2 className='text-4xl font-bold'>Admin Home</h2>
+                            <h2 className='text-4xl font-bold'>Instructor Home</h2>
                         </> :
                         <>
                             <h2 className='text-4xl font-bold'>Student Dashboard</h2>

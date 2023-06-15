@@ -58,7 +58,7 @@ const Register = () => {
             .then(result => {
                 const loggedUser = result.user;
                 const saveUser = { name: name, email: email , photo: photourl }
-                fetch('http://localhost:5000/users', {
+                fetch('https://summer-camp-school-server-mocha.vercel.app/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
@@ -103,7 +103,7 @@ const Register = () => {
                 const loggedUser = result.user;
                 navigate(from, { replace: true })
                 const saveUser = { name: loggedUser.displayName, email: loggedUser.email , photo: loggedUser.photoURL }
-                fetch('http://localhost:5000/users', {
+                fetch('https://summer-camp-school-server-mocha.vercel.app/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'

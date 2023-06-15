@@ -13,45 +13,74 @@ const ManageUsers = () => {
         return res.data;
     })
 
-    const handleMakeAdmin = user =>{
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+    const handleMakeAdmin = user => {
+        fetch(`https://summer-camp-school-server-mocha.vercel.app/users/admin/${user._id}`, {
             method: 'PATCH'
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            if(data.modifiedCount){
-                refetch();
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: `${user.name} is an Admin Now!`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount) {
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${user.name} is an Admin Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+    }
+
+    const handleDelete = item => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this User!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete this user'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/users/${item._id}`)
+                    .then(res => {
+                        console.log('deleted res', res.data);
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire(
+                                'Deleted!',
+                                'This User has been deleted',
+                                'success'
+                            )
+                        }
+                    })
+
             }
         })
     }
 
+
     const handleMakeInstructor = user => {
 
-        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+        fetch(`https://summer-camp-school-server-mocha.vercel.app/users/instructor/${user._id}`, {
             method: 'PATCH'
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            if(data.modifiedCount){
-                refetch();
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: `${user.name} is an Instructor Now!`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount) {
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${user.name} is an Instructor Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
 
     }
 
@@ -67,6 +96,7 @@ const ManageUsers = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,13 +105,14 @@ const ManageUsers = () => {
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user.role !== 'admin' && user.role !== 'instructor' ? 
-                                   <> <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-orange-600 mr-4 text-white">Make Admin</button>
-                                      <button onClick={() => handleMakeInstructor(user)} className="btn btn-ghost bg-orange-600 text-white">Make Instructor</button>
-                                   </>  : <> <button disabled onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-orange-600 mr-4 text-white">Make Admin</button>
-                                      <button disabled onClick={() => handleMakeInstructor(user)} className="btn btn-ghost bg-orange-600 text-white">Make Instructor</button>
-                                   </>
+                                <td>{user.role !== 'admin' && user.role !== 'instructor' ?
+                                    <> <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-orange-600 mr-4 text-white">Make Admin</button>
+                                        <button onClick={() => handleMakeInstructor(user)} className="btn btn-ghost bg-orange-600 text-white">Make Instructor</button>
+                                    </> : <> <button disabled onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-orange-600 mr-4 text-white">Make Admin</button>
+                                        <button disabled onClick={() => handleMakeInstructor(user)} className="btn btn-ghost bg-orange-600 text-white">Make Instructor</button>
+                                    </>
                                 } </td>
+                                <td> <button onClick={() => handleDelete(user)} className="btn btn-ghost bg-red-600  text-white"><FaTrashAlt></FaTrashAlt></button></td>
                             </tr>)
                         }
 

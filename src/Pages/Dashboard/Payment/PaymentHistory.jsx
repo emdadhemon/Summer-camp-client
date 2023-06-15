@@ -9,7 +9,7 @@ const PaymentHistory = () => {
     const {user} = useContext(AuthContext);
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/payment/${user?.email}`)
+        fetch(`https://summer-camp-school-server-mocha.vercel.app/payment/${user?.email}`)
         .then(res=>res.json())
         .then(data => setPayments(data))
     },[])

@@ -8,7 +8,6 @@ import Register from "../Pages/Login/Register";
 import Dashboard from "../Layout/Dashboard";
 import ManageUsers from "../Pages/Dashboard/ManageUsers";
 import ManageClasses from "../Pages/Dashboard/ManageClasses";
-import AdminHome from "../Pages/Dashboard/AdminHome";
 import AddClass from "../Pages/Dashboard/AddClass";
 import Myclasses from "../Pages/Dashboard/Myclasses";
 import Courses from "../Pages/Courses/Courses";
@@ -19,6 +18,7 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import EnrolledClasses from "../Pages/Dashboard/Student/EnrolledClasses";
 import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory";
 import DashboardHome from "../Pages/Dashboard/DashboardHome";
+import PrivateRoute from "./PrivateRoute";
 
   const router = createBrowserRouter([
     {
@@ -53,7 +53,7 @@ import DashboardHome from "../Pages/Dashboard/DashboardHome";
         children : [
             {
                 path : 'dashboard',
-                element : <DashboardHome></DashboardHome>
+                element : <PrivateRoute><DashboardHome></DashboardHome></PrivateRoute>
             },
             {
                 path : 'manageUsers',
@@ -78,7 +78,7 @@ import DashboardHome from "../Pages/Dashboard/DashboardHome";
             {
                 path : "payment/:id",
                 element : <Payment></Payment>,
-                loader : ({params}) => fetch(`http://localhost:5000/carts/${params.id}`) 
+                loader : ({params}) => fetch(`https://summer-camp-school-server-mocha.vercel.app/carts/${params.id}`) 
             },
             {
                 path : 'enrolledclasses',

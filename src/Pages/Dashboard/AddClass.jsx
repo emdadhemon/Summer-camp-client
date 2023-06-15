@@ -9,7 +9,7 @@ const AddClass = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        fetch("http://localhost:5000/class", {
+        fetch("https://summer-camp-school-server-mocha.vercel.app/class", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -29,8 +29,8 @@ const AddClass = () => {
             });
     }
 
-    return (
-        <div className='w-[80%]'>
+    return ( 
+        <div className='w-[80%] my-10'>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input
                     className='input border w-[50%] border-gray-800 m-2 bg-white text-black'

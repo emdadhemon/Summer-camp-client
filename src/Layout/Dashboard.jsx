@@ -1,15 +1,30 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaShoppingCart, FaWallet, FaCalendarAlt, FaHome, FaUtensils, FaBook, FaUsers } from 'react-icons/fa';
+import { FaShoppingCart, FaWallet, FaCalendarAlt, FaHome, FaUtensils, FaBook, FaUsers, FaClipboardList, FaUserAlt, FaBookOpen, FaBookDead, FaBookReader, FaRegCreditCard, FaHandPointUp } from 'react-icons/fa';
 import useAdmin from "../Hooks/UseAdmin";
 import UseInstructor from "../Hooks/UseInstructor";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Dashboard = () => {
+    const { user } = useContext(AuthContext);
+    // const [users, setusers] = useState([]);
+    // console.log(user)
+
+    // useEffect(()=>{
+       
+    //     fetch('https://summer-camp-school-server-mocha.vercel.app/users')
+    //     .then(res => res.json())
+    //     .then(data=>setusers(data))
+    // },[])
+
+    // const checkAdmin = users.find(u => u.email === user.email)
+    // console.log(checkAdmin)
 
     const [isAdmin] = useAdmin();
+
     const [isInstructor] = UseInstructor();
-    const { user } = useContext(AuthContext);
+
+
 
     return (
         <>
@@ -25,24 +40,24 @@ const Dashboard = () => {
                         {
                             isAdmin ?
                                 <>
-                                    <li><NavLink to="dashboard"><FaHome></FaHome> Dashboard Home</NavLink></li>
-                                    <li><NavLink to="/dashboard/manageClasses"><FaHome></FaHome> Manage Classes</NavLink></li>
-                                    <li><NavLink to="/dashboard/manageUsers"><FaHome></FaHome> Manage Users</NavLink></li>
+                                    <li><NavLink to="dashboard"><FaHome></FaHome> Admin Home</NavLink></li>
+                                    <li><NavLink to="/dashboard/manageClasses"><FaClipboardList></FaClipboardList> Manage Classes</NavLink></li>
+                                    <li><NavLink to="/dashboard/manageUsers"><FaUserAlt></FaUserAlt> Manage Users</NavLink></li>
                                 </> :
-
 
                                 isInstructor ?
                                     <>
-                                        <li><NavLink to="dashboard"><FaHome></FaHome> Dashboard Home</NavLink></li>
-                                        <li><NavLink to="/dashboard/addclass"><FaHome></FaHome>Add Class</NavLink></li>
-                                        <li><NavLink to="/dashboard/myclasses"><FaHome></FaHome>My Classes</NavLink></li>
-                                    </> :
+                                        <li><NavLink to="dashboard"><FaHome></FaHome> Instructor Home</NavLink></li>
+                                        <li><NavLink to="/dashboard/addclass"><FaBookOpen></FaBookOpen> Add Class</NavLink></li>
+                                        <li><NavLink to="/dashboard/myclasses"><FaBookReader></FaBookReader> My Classes</NavLink></li>
+                                    </> 
+                                    :
 
                                     <>
-                                        <li><NavLink to="dashboard"><FaHome></FaHome>Dashboard Home</NavLink></li>
-                                        <li><NavLink to="/dashboard/selectedclass"><FaHome></FaHome>My Selected Class</NavLink></li>
-                                        <li><NavLink to="/dashboard/enrolledclasses"><FaHome></FaHome>My enrolled classes</NavLink></li>
-                                        <li><NavLink to={`/dashboard/history/${user?.email}`}><FaHome></FaHome>Payment History</NavLink></li>
+                                        <li><NavLink to="dashboard"><FaHome></FaHome>Student Home</NavLink></li>
+                                        <li><NavLink to="/dashboard/selectedclass"><FaHandPointUp></FaHandPointUp>My Selected Class</NavLink></li>
+                                        <li><NavLink to="/dashboard/enrolledclasses"><FaBookOpen></FaBookOpen> My enrolled classes</NavLink></li>
+                                        <li><NavLink to={`/dashboard/history/${user?.email}`}><FaRegCreditCard></FaRegCreditCard> Payment History</NavLink></li>
 
                                     </>
                         }

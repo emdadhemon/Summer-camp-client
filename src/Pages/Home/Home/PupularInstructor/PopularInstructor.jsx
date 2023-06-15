@@ -4,7 +4,7 @@ const PopularInstructor = () => {
     const [instructors, setInstructors] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('https://summer-camp-school-server-mocha.vercel.app/users')
             .then(res => res.json())
             .then(data => {
                 const instructor = data.filter(d => d?.role === 'instructor')

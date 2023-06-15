@@ -12,8 +12,8 @@ const PopularClass = () => {
             <h1 className='text-center text-4xl font-bold mb-10'>Pupular Classes</h1>
             <div className='grid grid-cols-1'>
                 {
-                    approvedClasses.map(c => <div key={c?._id}>
-                        <div className='w-[70%] mx-auto bg-gray-700 mb-2'>
+                    approvedClasses.slice(0,6).map(c => <div key={c?._id}>
+                        <div className='w-[70%] mx-auto mb-2'>
                             <div className="hero-content flex-col lg:flex-row-reverse">
                                 <img src={c?.classimage} className="w-96 rounded-lg shadow-2xl" />
                                 <div className='w-96 lg:w-full'>

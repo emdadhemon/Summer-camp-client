@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import { FaUserCircle } from 'react-icons/fa';
+import img from '../../../assets/logo.png'
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -23,14 +24,18 @@ const Navbar = () => {
                         <li><Link>Classes</Link></li>
                     </ul>
                 </div>
-                <Link to="/" className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                <Link to="/" className="bg-white bg-opacity-30 w-48 rounded hover:bg-white">
+                    <img src={img} className='h-10' alt="" />
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/instructors">Instructors</Link></li>
                     <li><Link to="/classes">Classes</Link></li>
-                    <li><Link to="/dashboard/dashboard">Dashboard</Link></li>
+                    {
+                        user ? <li><Link to="/dashboard/dashboard">Dashboard</Link></li> : ''
+                    }
                 </ul>
             </div>
             <div className="navbar-end">

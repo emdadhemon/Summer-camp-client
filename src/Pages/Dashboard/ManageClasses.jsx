@@ -1,13 +1,17 @@
 import React from 'react';
 import UseClasses from '../../Hooks/UseClasses';
 import Swal from 'sweetalert2';
+import { FaTrashAlt } from 'react-icons/fa';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const ManageClasses = () => {
     const [classes, loading, refetch] = UseClasses();
 
+    const [axiosSecure] = useAxiosSecure();
+
 
     const handleApprove = course => {
-        fetch(`http://localhost:5000/class/${course?._id}`, {
+        fetch(`https://summer-camp-school-server-mocha.vercel.app/class/${course?._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -27,7 +31,7 @@ const ManageClasses = () => {
     }
 
     const handleDenied = course => {
-        fetch(`http://localhost:5000/deny/${course?._id}`, {
+        fetch(`https://summer-camp-school-server-mocha.vercel.app/deny/${course?._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -48,6 +52,35 @@ const ManageClasses = () => {
 
     const handleSendfeedback = course => {
         event.preventDefault()
+    }
+
+    const handleDelete = item => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/class/${item._id}`)
+                    .then(res => {
+                        console.log('deleted res', res.data);
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted',
+                                'success'
+                            )
+                        }
+                    })
+
+            }
+        })
     }
 
     return (
@@ -75,38 +108,39 @@ const ManageClasses = () => {
                             <td>
                                 {
                                     SingleClass?.status !== "approved" && SingleClass?.status !== "Denied" ?
-                                     <>
-                                        <button onClick={() => handleApprove(SingleClass)} className='btn w-[100%] bg-green-600 mb-2'>Approve</button>
-                                        <label htmlFor="my_modal_6" onClick={() => handleDenied(SingleClass)} className='btn w-[100%] bg-red-600'>Deny</label>
-                                    </> : 
-                                    <div className='uppercase'> {SingleClass?.status}</div>
+                                        <>
+                                            <button onClick={() => handleApprove(SingleClass)} className='btn w-[100%] bg-green-600 mb-2'>Approve</button>
+                                            <label htmlFor="my_modal_6" onClick={() => handleDenied(SingleClass)} className='btn w-[100%] bg-red-600'>Deny</label>
+                                        </> :
+                                        <>
+                                            <button disabled className='btn w-[100%] bg-green-600 mb-2'>Approve</button>
+                                            <button disabled className='btn w-[100%] bg-red-600'>Deny</button>
+                                        </>
                                 }
                             </td>
 
-                            <td> {SingleClass?.Feedback ? SingleClass?.Feedback : "No Feedback"}</td>
+                            <td> <button onClick={() => handleDelete(SingleClass)} className="btn btn-ghost bg-red-600  text-white"><FaTrashAlt></FaTrashAlt></button></td>
 
 
                             {/* modal body */}
-                            <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-                            <div className="modal">
-                                <div className="modal-box">
-                                    <h3 className="font-bold text-lg">Write Something...</h3>
-                                    <textarea placeholder="Bio" className="textarea textarea-bordered textarea-sm w-full max-w-xs" ></textarea>
-                                    <div className="modal-action">
-                                        <button onClick={() => handleSendfeedback(SingleClass)} htmlFor="my_modal_6" className="btn">Send FeedBack</button>
-                                    </div>
-                                </div>
-                            </div>
 
                         </tr>)
                     }
-
                 </tbody>
             </table>
 
+            {/* modal body */}
 
-
-
+            <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Write Something...</h3>
+                    <textarea placeholder="Bio" className="textarea textarea-bordered textarea-sm w-full max-w-xs" ></textarea>
+                    <div className="modal-action">
+                        <button onClick={() => handleSendfeedback(SingleClass)} htmlFor="my_modal_6" className="btn">Send FeedBack</button>
+                    </div>
+                </div>
+            </div>
 
 
 

@@ -20,7 +20,7 @@ const Courses = () => {
         console.log(item);
         if (user && user.email) {
             const cartItem = { classId: _id, classname, classimage, price, email: user.email }
-            fetch('http://localhost:5000/carts', {
+            fetch('https://summer-camp-school-server-mocha.vercel.app/carts', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
