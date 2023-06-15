@@ -38,10 +38,12 @@ const CartClasses = () => {
             }
         })
     }
+    const carts = cart.filter(c => c.paid !== true)
+
     return (
         <div className="w-full ms-12">
             <div className="uppercase font-semibold h-[60px] flex justify-between items-center">
-                <h3 className="text-3xl">Total Items: {cart.length}</h3>
+                <h3 className="text-3xl">Total Items: {carts.length}</h3>
             </div>
             <div className="w-full">
                 <table className="table w-full text-center">
@@ -57,7 +59,7 @@ const CartClasses = () => {
                     </thead>
                     <tbody>
                         {
-                            cart.map((item, index) => <tr
+                            carts.map((item, index) => <tr
                                 key={item._id}
                             >
                                 <td>

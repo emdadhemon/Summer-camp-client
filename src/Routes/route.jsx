@@ -16,6 +16,7 @@ import Instructors from "../Pages/instructors/instructors";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
 import CartClasses from "../Pages/Dashboard/Student/CartClasses";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import EnrolledClasses from "../Pages/Dashboard/Student/EnrolledClasses";
 
   const router = createBrowserRouter([
     {
@@ -76,6 +77,10 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
                 path : "payment/:id",
                 element : <Payment></Payment>,
                 loader : ({params}) => fetch(`http://localhost:5000/carts/${params.id}`) 
+            },
+            {
+                path : 'enrolledclasses',
+                element : <EnrolledClasses></EnrolledClasses>
             }
         ]
     },
