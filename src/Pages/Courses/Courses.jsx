@@ -3,12 +3,57 @@ import UseClasses from '../../Hooks/UseClasses';
 import useAdmin from '../../Hooks/UseAdmin';
 import UseInstructor from '../../Hooks/UseInstructor';
 import { AuthContext } from '../../Providers/AuthProvider';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Courses = () => {
     const [isAdmin] = useAdmin();
     const [isInstructor] = UseInstructor();
-
     const [classes] = UseClasses();
+    const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleAddToCart = item => {
+        const { classname, classimage, price, recipe, _id } = item;
+        console.log(item);
+        if (user && user.email) {
+            const cartItem = { classId: _id, classname, classimage, price, email: user.email }
+            fetch('http://localhost:5000/carts', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(cartItem)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'This class is added on your Cart',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
+        }
+        else {
+            Swal.fire({
+                title: 'Please login to Select this class',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login now!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } })
+                }
+            })
+        }
+    }
 
     const approvedClasses = classes.filter(c => c.status = 'approved')
     return (
@@ -25,7 +70,7 @@ const Courses = () => {
                                 <h2><strong>Available seats : </strong> {c?.availableseats}</h2>
                                 <h2><strong>Price :</strong> ${c?.price}</h2>
                                 <div className="card-actions justify-end">
-                                    <button disabled={ isAdmin || isInstructor ? true : false } className="btn btn-primary">Select</button>
+                                    <button onClick={()=>handleAddToCart(c)} disabled={isAdmin || isInstructor ? true : false} className="btn btn-primary">Select</button>
                                 </div>
                             </div>
                         </div>
