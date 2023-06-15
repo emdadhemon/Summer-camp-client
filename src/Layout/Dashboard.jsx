@@ -2,11 +2,14 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaShoppingCart, FaWallet, FaCalendarAlt, FaHome, FaUtensils, FaBook, FaUsers } from 'react-icons/fa';
 import useAdmin from "../Hooks/UseAdmin";
 import UseInstructor from "../Hooks/UseInstructor";
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Dashboard = () => {
 
     const [isAdmin] = useAdmin();
     const [isInstructor] = UseInstructor();
+    const { user } = useContext(AuthContext);
 
     return (
         <>
@@ -22,7 +25,7 @@ const Dashboard = () => {
                         {
                             isAdmin ?
                                 <>
-                                    <li><NavLink to="dashboard"><FaHome></FaHome> Admin Home</NavLink></li>
+                                    <li><NavLink to="dashboard"><FaHome></FaHome> Dashboard Home</NavLink></li>
                                     <li><NavLink to="/dashboard/manageClasses"><FaHome></FaHome> Manage Classes</NavLink></li>
                                     <li><NavLink to="/dashboard/manageUsers"><FaHome></FaHome> Manage Users</NavLink></li>
                                 </> :
@@ -30,15 +33,16 @@ const Dashboard = () => {
 
                                 isInstructor ?
                                     <>
-                                        <li><NavLink to="dashboard"><FaHome></FaHome> Instructor Home</NavLink></li>
+                                        <li><NavLink to="dashboard"><FaHome></FaHome> Dashboard Home</NavLink></li>
                                         <li><NavLink to="/dashboard/addclass"><FaHome></FaHome>Add Class</NavLink></li>
                                         <li><NavLink to="/dashboard/myclasses"><FaHome></FaHome>My Classes</NavLink></li>
                                     </> :
 
                                     <>
+                                        <li><NavLink to="dashboard"><FaHome></FaHome>Dashboard Home</NavLink></li>
                                         <li><NavLink to="/dashboard/selectedclass"><FaHome></FaHome>My Selected Class</NavLink></li>
                                         <li><NavLink to="/dashboard/enrolledclasses"><FaHome></FaHome>My enrolled classes</NavLink></li>
-                                        <li><NavLink to="/dashboard/history"><FaHome></FaHome>Payment History</NavLink></li>
+                                        <li><NavLink to={`/dashboard/history/${user?.email}`}><FaHome></FaHome>Payment History</NavLink></li>
 
                                     </>
                         }

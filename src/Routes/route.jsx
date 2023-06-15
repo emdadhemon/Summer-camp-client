@@ -17,6 +17,8 @@ import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
 import CartClasses from "../Pages/Dashboard/Student/CartClasses";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import EnrolledClasses from "../Pages/Dashboard/Student/EnrolledClasses";
+import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory";
+import DashboardHome from "../Pages/Dashboard/DashboardHome";
 
   const router = createBrowserRouter([
     {
@@ -51,7 +53,7 @@ import EnrolledClasses from "../Pages/Dashboard/Student/EnrolledClasses";
         children : [
             {
                 path : 'dashboard',
-                element : <AdminHome></AdminHome>
+                element : <DashboardHome></DashboardHome>
             },
             {
                 path : 'manageUsers',
@@ -81,6 +83,10 @@ import EnrolledClasses from "../Pages/Dashboard/Student/EnrolledClasses";
             {
                 path : 'enrolledclasses',
                 element : <EnrolledClasses></EnrolledClasses>
+            },
+            {
+                path : "history/:email" ,
+                element : <PaymentHistory></PaymentHistory>
             }
         ]
     },
