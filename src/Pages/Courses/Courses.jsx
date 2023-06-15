@@ -5,7 +5,8 @@ import UseInstructor from '../../Hooks/UseInstructor';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+import img from '../../assets/classes.jpg';
+import Cover from '../../Components/Cover';
 const Courses = () => {
     const [isAdmin] = useAdmin();
     const [isInstructor] = UseInstructor();
@@ -58,6 +59,7 @@ const Courses = () => {
     const approvedClasses = classes.filter(c => c.status = 'approved')
     return (
         <div>
+            <Cover img={img} title={'Classes'}></Cover>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
                 {
                     approvedClasses.map(c => <div key={c?._id}>

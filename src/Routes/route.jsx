@@ -13,6 +13,9 @@ import AddClass from "../Pages/Dashboard/AddClass";
 import Myclasses from "../Pages/Dashboard/Myclasses";
 import Courses from "../Pages/Courses/Courses";
 import Instructors from "../Pages/instructors/instructors";
+import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
+import CartClasses from "../Pages/Dashboard/Student/CartClasses";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
   const router = createBrowserRouter([
     {
@@ -64,8 +67,21 @@ import Instructors from "../Pages/instructors/instructors";
             {
                 path : 'myclasses',
                 element : <Myclasses></Myclasses>
+            },
+            {
+                path : 'selectedclass',
+                element : <CartClasses></CartClasses>
+            },
+            {
+                path : "payment/:id",
+                element : <Payment></Payment>,
+                loader : ({params}) => fetch(`http://localhost:5000/carts/${params.id}`) 
             }
         ]
+    },
+    {
+        path : "*" ,
+        element : <ErrorPage></ErrorPage>
     }
   ]);
 

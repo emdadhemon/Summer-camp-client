@@ -21,25 +21,31 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 bg-base-200 text-base-content">
                         {
                             isAdmin ?
-                            <>
-                                <li><NavLink to="dashboard"><FaHome></FaHome> Admin Home</NavLink></li>
-                                <li><NavLink to="/dashboard/manageClasses"><FaHome></FaHome> Manage Classes</NavLink></li>
-                                <li><NavLink to="/dashboard/manageUsers"><FaHome></FaHome> Manage Users</NavLink></li>
-                            </> :
-                        
-                        
-                            isInstructor ?
-                            <>
-                                <li><NavLink to="dashboard"><FaHome></FaHome> Instructor Home</NavLink></li>
-                                <li><NavLink to="/dashboard/addclass"><FaHome></FaHome>Add Class</NavLink></li>
-                                <li><NavLink to="/dashboard/myclasses"><FaHome></FaHome>My Classes</NavLink></li>
-                            </> : ''
+                                <>
+                                    <li><NavLink to="dashboard"><FaHome></FaHome> Admin Home</NavLink></li>
+                                    <li><NavLink to="/dashboard/manageClasses"><FaHome></FaHome> Manage Classes</NavLink></li>
+                                    <li><NavLink to="/dashboard/manageUsers"><FaHome></FaHome> Manage Users</NavLink></li>
+                                </> :
+
+
+                                isInstructor ?
+                                    <>
+                                        <li><NavLink to="dashboard"><FaHome></FaHome> Instructor Home</NavLink></li>
+                                        <li><NavLink to="/dashboard/addclass"><FaHome></FaHome>Add Class</NavLink></li>
+                                        <li><NavLink to="/dashboard/myclasses"><FaHome></FaHome>My Classes</NavLink></li>
+                                    </> :
+
+                                    <>
+                                        <li><NavLink to="/dashboard/selectedclass"><FaHome></FaHome>My Selected Class</NavLink></li>
+                                        <li><NavLink to="/dashboard/enrolledclasses"><FaHome></FaHome>My enrolled classes</NavLink></li>
+
+                                    </>
                         }
                     </ul>
-                    <div>
-                        <li><NavLink to="/"><FaHome></FaHome>Home</NavLink> </li>
-                        <li><NavLink to="/menu"> Our Menu</NavLink></li>
-                        <li><NavLink to="/order/salad">Order Food</NavLink></li>
+                    <div className="divider">
+                        <ul>
+                            <li><NavLink to="/"><FaHome className="inline-block mr-2"></FaHome><span>Home</span></NavLink></li>
+                        </ul>
                     </div>
                 </div>
             </div>

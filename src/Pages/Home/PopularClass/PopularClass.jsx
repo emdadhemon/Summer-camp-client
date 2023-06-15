@@ -13,7 +13,7 @@ const PopularClass = () => {
             <div className='grid grid-cols-1'>
                 {
                     approvedClasses.map(c => <div key={c?._id}>
-                        <div className='w-[70%] mx-auto border mb-2'>
+                        <div className='w-[70%] mx-auto bg-gray-700 mb-2'>
                             <div className="hero-content flex-col lg:flex-row-reverse">
                                 <img src={c?.classimage} className="w-96 rounded-lg shadow-2xl" />
                                 <div className='w-96 lg:w-full'>

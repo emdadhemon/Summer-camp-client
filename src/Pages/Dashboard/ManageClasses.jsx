@@ -47,7 +47,7 @@ const ManageClasses = () => {
     }
 
     const handleSendfeedback = course => {
-        event.preventDefault() 
+        event.preventDefault()
     }
 
     return (
@@ -72,10 +72,17 @@ const ManageClasses = () => {
                             <td>{SingleClass.name} <br /> {SingleClass.email}</td>
                             <td>Price : $
                                 {SingleClass.price} <br /> Available Seats : {SingleClass.availableseats}</td>
-                            <td> {SingleClass?.status !== "approved" && SingleClass?.status !== "Denied" ? <>
-                                <button onClick={() => handleApprove(SingleClass)} className='btn w-[100%] bg-green-600 mb-2'>Approve</button>
-                                <label htmlFor="my_modal_6" onClick={() => handleDenied(SingleClass)} className='btn w-[100%] bg-red-600'>Deny</label>
-                            </> : <div className='uppercase'> {SingleClass?.status}</div>}</td>
+                            <td>
+                                {
+                                    SingleClass?.status !== "approved" && SingleClass?.status !== "Denied" ?
+                                     <>
+                                        <button onClick={() => handleApprove(SingleClass)} className='btn w-[100%] bg-green-600 mb-2'>Approve</button>
+                                        <label htmlFor="my_modal_6" onClick={() => handleDenied(SingleClass)} className='btn w-[100%] bg-red-600'>Deny</label>
+                                    </> : 
+                                    <div className='uppercase'> {SingleClass?.status}</div>
+                                }
+                            </td>
+
                             <td> {SingleClass?.Feedback ? SingleClass?.Feedback : "No Feedback"}</td>
 
 
@@ -86,7 +93,7 @@ const ManageClasses = () => {
                                     <h3 className="font-bold text-lg">Write Something...</h3>
                                     <textarea placeholder="Bio" className="textarea textarea-bordered textarea-sm w-full max-w-xs" ></textarea>
                                     <div className="modal-action">
-                                        <label onClick={() => handleSendfeedback(SingleClass)} htmlFor="my_modal_6" className="btn">Send FeedBack</label>
+                                        <button onClick={() => handleSendfeedback(SingleClass)} htmlFor="my_modal_6" className="btn">Send FeedBack</button>
                                     </div>
                                 </div>
                             </div>
