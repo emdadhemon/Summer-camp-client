@@ -1,9 +1,12 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const CheckOut = ({ cart }) => {
+    const {user} = useContext(AuthContext)
     const [cardError, setCardError] = useState("");
     const [success, setSuccess] = useState("");
     const [processing, setProcessing] = useState(false);
@@ -12,6 +15,7 @@ const CheckOut = ({ cart }) => {
     const stripe = useStripe();
     const elements = useElements();
     const { price, email, classname, classimage, _id } = cart;
+    const navigate = useNavigate()
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
